@@ -1,9 +1,11 @@
 'use strict'
 
 const { title, now, print, operations } = require('../utils')
-const router = require('express/lib/router')()
+const { RegExpRouter } = require('../node_modules/hono/dist/cjs/router/reg-exp-router')
 
-title('express benchmark (WARNING: includes handling)')
+const router = new RegExpRouter()
+
+title('Hono RegExp benchmark')
 
 const routes = [
   { method: 'GET', url: '/user' },
@@ -11,7 +13,8 @@ const routes = [
   { method: 'GET', url: '/user/avatar' },
   { method: 'GET', url: '/user/lookup/username/:username' },
   { method: 'GET', url: '/user/lookup/email/:address' },
-  { method: 'GET', url: '/event/foo' },
+  // Disabled because not supported
+  // { method: 'GET', url: '/event/foo' },
   { method: 'GET', url: '/event/:id' },
   { method: 'GET', url: '/event/:id/comments' },
   { method: 'POST', url: '/event/:id/comment' },
@@ -26,56 +29,52 @@ var i = 0
 var time = 0
 
 routes.forEach(route => {
-  if (route.method === 'GET') {
-    router.route(route.url).get(noop)
-  } else {
-    router.route(route.url).post(noop)
-  }
+  router.add(route.method, route.url, noop)
 })
 
 time = now()
 for (i = 0; i < operations; i++) {
-  router.handle({ method: 'GET', url: '/user' })
+  router.match('GET', '/user')
 }
 print('short static:', time)
 
 time = now()
 for (i = 0; i < operations; i++) {
-  router.handle({ method: 'GET', url: '/user/comments' })
+  router.match('GET', '/user/comments')
 }
 print('static with same radix:', time)
 
 time = now()
 for (i = 0; i < operations; i++) {
-  router.handle({ method: 'GET', url: '/user/lookup/username/john' })
+  router.match('GET', '/user/lookup/username/john')
 }
 print('dynamic route:', time)
 
 time = now()
 for (i = 0; i < operations; i++) {
-  router.handle({ method: 'GET', url: '/event/abcd1234/comments' }, null, noop)
+  router.match('GET', '/event/abcd1234/comments')
 }
 print('mixed static dynamic:', time)
 
 time = now()
 for (i = 0; i < operations; i++) {
-  router.handle({ method: 'GET', url: '/very/deeply/nested/route/hello/there' }, null, noop)
+  router.match('GET', '/very/deeply/nested/route/hello/there')
 }
 print('long static:', time)
 
 time = now()
 for (i = 0; i < operations; i++) {
-  router.handle({ method: 'GET', url: '/static/index.html' }, null, noop)
+  router.match('GET', '/static/index.html')
 }
 print('wildcard:', time)
 
 time = now()
 for (i = 0; i < operations; i++) {
-  router.handle({ method: 'GET', url: '/user' })
-  router.handle({ method: 'GET', url: '/user/comments' })
-  router.handle({ method: 'GET', url: '/user/lookup/username/john' })
-  router.handle({ method: 'GET', url: '/event/abcd1234/comments' }, null, noop)
-  router.handle({ method: 'GET', url: '/very/deeply/nested/route/hello/there' }, null, noop)
-  router.handle({ method: 'GET', url: '/static/index.html' }, null, noop)
+  router.match('GET', '/user')
+  router.match('GET', '/user/comments')
+  router.match('GET', '/user/lookup/username/john')
+  router.match('GET', '/event/abcd1234/comments')
+  router.match('GET', '/very/deeply/nested/route/hello/there')
+  router.match('GET', '/static/index.html')
 }
 print('all together:', time)

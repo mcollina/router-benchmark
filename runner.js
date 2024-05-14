@@ -13,7 +13,10 @@ const benchmarks = [
   'router.js',
   'routr.js',
   'server-router.js',
-  'trek-router.js'
+  'trek-router.js',
+  'hono-regexp.js',
+  'hono-trie.js',
+  'hono-smart.js'
 ]
 
 const queue = new Queue()
