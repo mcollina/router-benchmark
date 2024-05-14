@@ -17,7 +17,7 @@ const router = new Routr([
   { name: 'ninth', method: 'get', path: '/map/:location/events' },
   { name: 'tenth', method: 'get', path: '/status' },
   { name: 'eleventh', method: 'get', path: '/very/deeply/nested/route/hello/there' },
-  { name: 'twelfth', method: 'get', path: '/static/*' }
+  { name: 'twelfth', method: 'get', path: '/static/(.*)' }
 ])
 
 var i = 0

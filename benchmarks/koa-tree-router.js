@@ -1,7 +1,8 @@
 'use strict'
 
 const { title, now, print, operations } = require('../utils')
-const router = require('koa-tree-router')()
+const KoaTreeRouter = require('koa-tree-router')
+const router = new KoaTreeRouter()
 
 title('koa-tree-router benchmark')
 
