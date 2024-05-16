@@ -12,6 +12,7 @@ const routes = [
   { method: 'GET', path: '/user/avatar' },
   { method: 'GET', path: '/user/lookup/username/{username}' },
   { method: 'GET', path: '/user/lookup/email/{address}' },
+  { method: 'GET', url: '/event/foo' },
   { method: 'GET', path: '/event/{id}' },
   { method: 'GET', path: '/event/{id}/comments' },
   { method: 'POST', path: '/event/{id}/comment' },
