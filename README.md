@@ -16,150 +16,207 @@ Tested routers:
 - [server-router](https://github.com/yoshuawuyts/server-router)
 - [trek-router](https://www.npmjs.com/package/trek-router)
 - [hono](https://www.npmjs.com/package/hono)
+- [rou3](https://github.com/h3js/rou3)
 
 This benchmarks aims to test only http routers, so the method handling should be included.  
 Do you know other routers? [PR](https://github.com/delvedor/router-benchmark/pulls)! :D
 
 <a name="results"></a>
 ## Results
-*These benchmarks where taken under node v20.12.1, on a MacBook Pro with M1 Max CPU:
+*These benchmarks were taken under node v24.18.0, on Linux with an Intel Core i7-7700 CPU:
 
 ```
 =======================
  find-my-way benchmark
 =======================
-short static: 31,072,265 ops/sec
-static with same radix: 10,217,209 ops/sec
-dynamic route: 5,180,911 ops/sec
-mixed static dynamic: 6,341,883 ops/sec
-long static: 7,009,262 ops/sec
-wildcard: 8,289,926 ops/sec
-all together: 1,228,176 ops/sec
+short static: 22,434,078 ops/sec
+static with same radix: 5,757,041 ops/sec
+dynamic route: 4,923,625 ops/sec
+mixed static dynamic: 6,171,494 ops/sec
+long static: 7,193,105 ops/sec
+wildcard: 7,320,630 ops/sec
+all together: 1,053,227 ops/sec
+
+================================
+ find-my-way compiled benchmark
+================================
+short static: 34,882,661 ops/sec
+static with same radix: 25,514,134 ops/sec
+dynamic route: 8,473,459 ops/sec
+mixed static dynamic: 8,485,437 ops/sec
+long static: 37,208,278 ops/sec
+wildcard: 10,236,316 ops/sec
+all together: 2,492,840 ops/sec
 
 ================
  call benchmark
 ================
-short static: 10,713,850 ops/sec
-static with same radix: 10,135,473 ops/sec
-dynamic route: 2,535,578 ops/sec
-mixed static dynamic: 2,134,821 ops/sec
-long static: 9,980,745 ops/sec
-wildcard: 3,069,167 ops/sec
-all together: 655,299 ops/sec
+short static: 4,126,779 ops/sec
+static with same radix: 3,049,304 ops/sec
+dynamic route: 886,951 ops/sec
+mixed static dynamic: 936,623 ops/sec
+long static: 2,024,755 ops/sec
+wildcard: 1,229,061 ops/sec
+all together: 241,221 ops/sec
 
 ================================================
  express benchmark (WARNING: includes handling)
 ================================================
-short static: 4,072,568 ops/sec
-static with same radix: 3,500,655 ops/sec
-dynamic route: 1,976,253 ops/sec
-mixed static dynamic: 1,512,690 ops/sec
-long static: 1,655,627 ops/sec
-wildcard: 1,212,603 ops/sec
-all together: 303,500 ops/sec
+short static: 2,079,521 ops/sec
+static with same radix: 1,687,849 ops/sec
+dynamic route: 1,019,757 ops/sec
+mixed static dynamic: 747,992 ops/sec
+long static: 774,706 ops/sec
+wildcard: 578,236 ops/sec
+all together: 151,589 ops/sec
 
 ======================
  koa-router benchmark
 ======================
-short static: 4,023,621 ops/sec
-static with same radix: 3,929,252 ops/sec
-dynamic route: 3,800,619 ops/sec
-mixed static dynamic: 3,483,180 ops/sec
-long static: 3,825,692 ops/sec
-wildcard: 3,818,680 ops/sec
-all together: 594,568 ops/sec
+short static: 2,143,931 ops/sec
+static with same radix: 2,123,671 ops/sec
+dynamic route: 2,079,795 ops/sec
+mixed static dynamic: 1,903,657 ops/sec
+long static: 2,019,762 ops/sec
+wildcard: 2,148,944 ops/sec
+all together: 321,534 ops/sec
 
 ===========================
  koa-tree-router benchmark
 ===========================
-short static: 41,134,701 ops/sec
-static with same radix: 16,229,880 ops/sec
-dynamic route: 8,348,122 ops/sec
-mixed static dynamic: 10,484,754 ops/sec
-long static: 18,349,227 ops/sec
-wildcard: 10,624,711 ops/sec
-all together: 2,253,815 ops/sec
+short static: 32,303,456 ops/sec
+static with same radix: 11,497,009 ops/sec
+dynamic route: 5,599,664 ops/sec
+mixed static dynamic: 6,278,941 ops/sec
+long static: 12,502,167 ops/sec
+wildcard: 7,987,439 ops/sec
+all together: 1,531,280 ops/sec
 
 ===============================================
  router benchmark (WARNING: includes handling)
 ===============================================
-short static: 3,912,437 ops/sec
-static with same radix: 3,392,388 ops/sec
-dynamic route: 1,921,728 ops/sec
-mixed static dynamic: 1,495,298 ops/sec
-long static: 1,642,796 ops/sec
-wildcard: 1,179,037 ops/sec
-all together: 289,533 ops/sec
+short static: 1,953,406 ops/sec
+static with same radix: 1,634,856 ops/sec
+dynamic route: 1,010,458 ops/sec
+mixed static dynamic: 717,379 ops/sec
+long static: 759,314 ops/sec
+wildcard: 565,624 ops/sec
+all together: 148,455 ops/sec
 
 =================
  routr benchmark
 =================
-short static: 14,551,478 ops/sec
-static with same radix: 7,161,966 ops/sec
-dynamic route: 2,583,981 ops/sec
-mixed static dynamic: 1,598,039 ops/sec
-long static: 1,456,027 ops/sec
-wildcard: 1,059,326 ops/sec
-all together: 319,237 ops/sec
+short static: 8,865,768 ops/sec
+static with same radix: 4,064,152 ops/sec
+dynamic route: 1,585,142 ops/sec
+mixed static dynamic: 1,046,520 ops/sec
+long static: 983,439 ops/sec
+wildcard: 687,282 ops/sec
+all together: 208,937 ops/sec
 
 =========================
  server-router benchmark
 =========================
-short static: 5,512,824 ops/sec
-static with same radix: 5,038,429 ops/sec
-dynamic route: 3,067,518 ops/sec
-mixed static dynamic: 2,984,734 ops/sec
-long static: 3,712,515 ops/sec
-wildcard: 2,837,728 ops/sec
-all together: 548,928 ops/sec
+short static: 2,255,426 ops/sec
+static with same radix: 1,680,304 ops/sec
+dynamic route: 1,072,326 ops/sec
+mixed static dynamic: 1,180,651 ops/sec
+long static: 971,399 ops/sec
+wildcard: 1,244,617 ops/sec
+all together: 209,528 ops/sec
 
 =======================
  trek-router benchmark
 =======================
-short static: 23,602,464 ops/sec
-static with same radix: 11,075,971 ops/sec
-dynamic route: 4,874,311 ops/sec
-mixed static dynamic: 5,776,478 ops/sec
-long static: 14,324,775 ops/sec
-wildcard: 7,897,997 ops/sec
-all together: 1,385,493 ops/sec
+short static: 15,950,892 ops/sec
+static with same radix: 7,462,400 ops/sec
+dynamic route: 3,139,335 ops/sec
+mixed static dynamic: 3,770,860 ops/sec
+long static: 8,182,750 ops/sec
+wildcard: 5,035,378 ops/sec
+all together: 848,873 ops/sec
 
 =======================
  Hono RegExp benchmark
 =======================
-short static: 62,339,604 ops/sec
-static with same radix: 76,913,463 ops/sec
-dynamic route: 11,485,562 ops/sec
-mixed static dynamic: 12,294,238 ops/sec
-long static: 78,184,047 ops/sec
-wildcard: 13,449,756 ops/sec
-all together: 3,662,367 ops/sec
+short static: 16,082,036 ops/sec
+static with same radix: 13,607,184 ops/sec
+dynamic route: 4,338,180 ops/sec
+mixed static dynamic: 4,336,028 ops/sec
+long static: 10,644,177 ops/sec
+wildcard: 4,783,642 ops/sec
+all together: 1,060,734 ops/sec
 
 ===========================
  Hono TrieRouter benchmark
 ===========================
-short static: 4,583,780 ops/sec
-static with same radix: 4,163,564 ops/sec
-dynamic route: 1,077,599 ops/sec
-mixed static dynamic: 2,226,234 ops/sec
-long static: 2,931,620 ops/sec
-wildcard: 2,919,422 ops/sec
-all together: 480,035 ops/sec
+short static: 2,892,199 ops/sec
+static with same radix: 2,064,644 ops/sec
+dynamic route: 761,001 ops/sec
+mixed static dynamic: 1,368,450 ops/sec
+long static: 950,422 ops/sec
+wildcard: 1,920,641 ops/sec
+all together: 242,322 ops/sec
 
 ======================
  Hono Smart benchmark
 ======================
-short static: 4,510,261 ops/sec
-static with same radix: 4,089,633 ops/sec
-dynamic route: 1,068,316 ops/sec
-mixed static dynamic: 2,192,891 ops/sec
-long static: 2,931,982 ops/sec
-wildcard: 2,971,101 ops/sec
-all together: 487,912 ops/sec
+short static: 2,859,088 ops/sec
+static with same radix: 2,112,066 ops/sec
+dynamic route: 786,114 ops/sec
+mixed static dynamic: 1,409,954 ops/sec
+long static: 970,022 ops/sec
+wildcard: 1,791,787 ops/sec
+all together: 234,531 ops/sec
+
+================
+ rou3 benchmark
+================
+short static: 23,322,295 ops/sec
+static with same radix: 14,608,921 ops/sec
+dynamic route: 1,184,723 ops/sec
+mixed static dynamic: 1,289,727 ops/sec
+long static: 10,652,103 ops/sec
+wildcard: 1,083,790 ops/sec
+all together: 320,282 ops/sec
+
+=========================
+ rou3 compiled benchmark
+=========================
+short static: 80,895,759 ops/sec
+static with same radix: 43,523,067 ops/sec
+dynamic route: 3,290,384 ops/sec
+mixed static dynamic: 3,978,541 ops/sec
+long static: 52,341,902 ops/sec
+wildcard: 4,083,133 ops/sec
+all together: 1,146,978 ops/sec
+
+=======================================
+ rou3 + querystring/decoding benchmark
+=======================================
+short static: 17,311,314 ops/sec
+static with same radix: 9,526,923 ops/sec
+dynamic route: 1,056,480 ops/sec
+mixed static dynamic: 1,181,231 ops/sec
+long static: 4,960,866 ops/sec
+wildcard: 1,071,281 ops/sec
+all together: 293,447 ops/sec
+
+================================================
+ rou3 compiled + querystring/decoding benchmark
+================================================
+short static: 41,058,811 ops/sec
+static with same radix: 19,620,116 ops/sec
+dynamic route: 2,620,871 ops/sec
+mixed static dynamic: 3,101,327 ops/sec
+long static: 7,863,429 ops/sec
+wildcard: 3,390,240 ops/sec
+all together: 771,881 ops/sec
 ```
 
 ### Run the benchmarks
 Do you wan to run the benchmarks by yourself?  
+You need Node.js 22.12 or later (rou3 is ESM only and is loaded with `require`).  
 Run the following:
 ```bash
 git clone https://github.com/delvedor/router-benchmark
@@ -173,6 +230,7 @@ npm start
 | Router            | Framework independent | Decode URI    | Querystring handling  |  Regex route support  | Multi-parametric route support    |  Max parameter length | Mix Params and Static paths   |
 | :---------------- | :-------------------- | :------------ | :-------------------- | :-------------------- |:--------------------------------- |:--------------------- |:----------------------------- |
 | `find-my-way`     | &#10003;              | &#10003;      | &#10003;              | &#10003;              | &#10003;                          | &#10003;              | &#10003;                      |
+| `find-my-way compiled`| &#10003;              | &#10003;      | &#10003;              | &#10003;              | &#10003;                          | &#10003;              | &#10003;                      |
 | `call`            | &#10003;              | &#10003;      | &#10007;              | ?                     | ?                                 | ?                     | &#10003;                      |
 | `express`         | &#10007;              | &#10003;      | &#10003;              | &#10003;              | &#10003;                          | &#10007;              | &#10003;                      |
 | `koa-router`      | &#10007;              | &#10007;      | &#10007;              | &#10003;              | &#10003;                          | &#10007;              | &#10003;                      |
@@ -184,6 +242,7 @@ npm start
 | `hono Trie`       | &#10007;              | &#10003;      | &#10007;              | &#10003;              | &#10003;                          | &#10007;              | &#10003;                      |
 | `hono RegExp`     | &#10007;              | &#10003;      | &#10007;              | &#10003;              | &#10007;                          | &#10007;              | &#10007;                      |
 | `hono Smart`      | &#10007;              | &#10003;      | &#10007;              | &#10003;              | &#10003;                          | &#10007;              | &#10003;                      |
+| `rou3`            | &#10003;              | &#10007;      | &#10007;              | &#10003;              | &#10003;                          | &#10007;              | &#10003;                      |
 
 *Did you find incorrect data in the above table? Please send a pr!*
 
@@ -218,6 +277,8 @@ wildcard: { method: 'GET', url: '/static/index.html' }
 all together: all the above at the same time
 ```
 Every test is executed 1 million times, the time is taken with `process.hrtime()`, the final result is expressed in operations per second.
+
+Every lookup gets a new URL string, built with `String.fromCharCode` like the `req.url` a server gets for each request. Reusing one string literal would let V8 caches keyed on the string (internalized-string lookups, the `String#split` results cache) make some routers look faster than they are on real traffic. The time spent building the strings is measured separately and subtracted from the results.
 
 <a name="license"></a>
 ## License

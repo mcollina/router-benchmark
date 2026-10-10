@@ -1,6 +1,6 @@
 'use strict'
 
-const { title, now, print, operations } = require('../utils')
+const { title, now, print, operations, fresh, stringCost } = require('../utils')
 const call = require('call')
 const router = new call.Router()
 
@@ -12,7 +12,7 @@ const routes = [
   { method: 'GET', path: '/user/avatar' },
   { method: 'GET', path: '/user/lookup/username/{username}' },
   { method: 'GET', path: '/user/lookup/email/{address}' },
-  { method: 'GET', url: '/event/foo' },
+  { method: 'GET', path: '/event/foo' },
   { method: 'GET', path: '/event/{id}' },
   { method: 'GET', path: '/event/{id}/comments' },
   { method: 'POST', path: '/event/{id}/comment' },
@@ -25,54 +25,69 @@ const routes = [
 function noop () {}
 var i = 0
 var time = 0
+var cost = 0
 
 routes.forEach(route => {
   router.add(route, noop)
 })
 
-time = now()
-for (i = 0; i < operations; i++) {
-  router.route('get', '/user')
-}
-print('short static:', time)
+const shortStatic = fresh('/user')
+const sameRadix = fresh('/user/comments')
+const dynamicRoute = fresh('/user/lookup/username/john')
+const mixedRoute = fresh('/event/abcd1234/comments')
+const longStatic = fresh('/very/deeply/nested/route/hello/there')
+const wildcard = fresh('/static/index.html')
 
+cost = stringCost(shortStatic)
 time = now()
 for (i = 0; i < operations; i++) {
-  router.route('get', '/user/comments')
+  router.route('get', shortStatic())
 }
-print('static with same radix:', time)
+print('short static:', time, cost)
 
+cost = stringCost(sameRadix)
 time = now()
 for (i = 0; i < operations; i++) {
-  router.route('get', '/user/lookup/username/john')
+  router.route('get', sameRadix())
 }
-print('dynamic route:', time)
+print('static with same radix:', time, cost)
 
+cost = stringCost(dynamicRoute)
 time = now()
 for (i = 0; i < operations; i++) {
-  router.route('get', '/event/abcd1234/comments')
+  router.route('get', dynamicRoute())
 }
-print('mixed static dynamic:', time)
+print('dynamic route:', time, cost)
 
+cost = stringCost(mixedRoute)
 time = now()
 for (i = 0; i < operations; i++) {
-  router.route('get', '/very/deeply/nested/route/hello/there')
+  router.route('get', mixedRoute())
 }
-print('long static:', time)
+print('mixed static dynamic:', time, cost)
 
+cost = stringCost(longStatic)
 time = now()
 for (i = 0; i < operations; i++) {
-  router.route('get', '/static/index.html')
+  router.route('get', longStatic())
 }
-print('wildcard:', time)
+print('long static:', time, cost)
 
+cost = stringCost(wildcard)
 time = now()
 for (i = 0; i < operations; i++) {
-  router.route('get', '/user')
-  router.route('get', '/user/comments')
-  router.route('get', '/user/lookup/username/john')
-  router.route('get', '/event/abcd1234/comments')
-  router.route('get', '/very/deeply/nested/route/hello/there')
-  router.route('get', '/static/index.html')
+  router.route('get', wildcard())
 }
-print('all together:', time)
+print('wildcard:', time, cost)
+
+cost = stringCost(shortStatic, sameRadix, dynamicRoute, mixedRoute, longStatic, wildcard)
+time = now()
+for (i = 0; i < operations; i++) {
+  router.route('get', shortStatic())
+  router.route('get', sameRadix())
+  router.route('get', dynamicRoute())
+  router.route('get', mixedRoute())
+  router.route('get', longStatic())
+  router.route('get', wildcard())
+}
+print('all together:', time, cost)

@@ -6,6 +6,7 @@ const { Queue } = require('./utils')
 
 const benchmarks = [
   'find-my-way.js',
+  'find-my-way-compiled.js',
   'call.js',
   'express.js',
   'koa-router.js',
@@ -16,7 +17,11 @@ const benchmarks = [
   'trek-router.js',
   'hono-regexp.js',
   'hono-trie.js',
-  'hono-smart.js'
+  'hono-smart.js',
+  'rou3.js',
+  'rou3-compiled.js',
+  'rou3-url-handling.js',
+  'rou3-compiled-url-handling.js'
 ]
 
 const queue = new Queue()
