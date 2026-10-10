@@ -6,7 +6,7 @@ const { RegExpRouter } = require('../node_modules/hono/dist/cjs/router/reg-exp-r
 const { TrieRouter } = require('../node_modules/hono/dist/cjs/router/trie-router')
 
 const router = new SmartRouter({
-  routers: [new RegExpRouter(), new TrieRouter()],
+  routers: [new RegExpRouter(), new TrieRouter()]
 })
 
 title('Hono Smart benchmark')

@@ -1,6 +1,6 @@
 # router-benchmark
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/) [![Build Status](https://travis-ci.org/delvedor/router-benchmark.svg?branch=master)](https://travis-ci.org/delvedor/router-benchmark)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/) [![CI](https://github.com/mcollina/router-benchmark/actions/workflows/ci.yml/badge.svg)](https://github.com/mcollina/router-benchmark/actions/workflows/ci.yml)
 
 Benchmark of the most commonly used http routers.
 
