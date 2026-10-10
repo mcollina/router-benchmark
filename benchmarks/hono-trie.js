@@ -1,6 +1,6 @@
 'use strict'
 
-const { title, now, print, operations } = require('../utils')
+const { title, now, print, operations, fresh, stringCost } = require('../utils')
 const { TrieRouter } = require('../node_modules/hono/dist/cjs/router/trie-router')
 
 const router = new TrieRouter()
@@ -26,54 +26,69 @@ const routes = [
 function noop () {}
 var i = 0
 var time = 0
+var cost = 0
 
 routes.forEach(route => {
   router.add(route.method, route.url, noop)
 })
 
-time = now()
-for (i = 0; i < operations; i++) {
-  router.match('GET', '/user')
-}
-print('short static:', time)
+const shortStatic = fresh('/user')
+const sameRadix = fresh('/user/comments')
+const dynamicRoute = fresh('/user/lookup/username/john')
+const mixedRoute = fresh('/event/abcd1234/comments')
+const longStatic = fresh('/very/deeply/nested/route/hello/there')
+const wildcard = fresh('/static/index.html')
 
+cost = stringCost(shortStatic)
 time = now()
 for (i = 0; i < operations; i++) {
-  router.match('GET', '/user/comments')
+  router.match('GET', shortStatic())
 }
-print('static with same radix:', time)
+print('short static:', time, cost)
 
+cost = stringCost(sameRadix)
 time = now()
 for (i = 0; i < operations; i++) {
-  router.match('GET', '/user/lookup/username/john')
+  router.match('GET', sameRadix())
 }
-print('dynamic route:', time)
+print('static with same radix:', time, cost)
 
+cost = stringCost(dynamicRoute)
 time = now()
 for (i = 0; i < operations; i++) {
-  router.match('GET', '/event/abcd1234/comments')
+  router.match('GET', dynamicRoute())
 }
-print('mixed static dynamic:', time)
+print('dynamic route:', time, cost)
 
+cost = stringCost(mixedRoute)
 time = now()
 for (i = 0; i < operations; i++) {
-  router.match('GET', '/very/deeply/nested/route/hello/there')
+  router.match('GET', mixedRoute())
 }
-print('long static:', time)
+print('mixed static dynamic:', time, cost)
 
+cost = stringCost(longStatic)
 time = now()
 for (i = 0; i < operations; i++) {
-  router.match('GET', '/static/index.html')
+  router.match('GET', longStatic())
 }
-print('wildcard:', time)
+print('long static:', time, cost)
 
+cost = stringCost(wildcard)
 time = now()
 for (i = 0; i < operations; i++) {
-  router.match('GET', '/user')
-  router.match('GET', '/user/comments')
-  router.match('GET', '/user/lookup/username/john')
-  router.match('GET', '/event/abcd1234/comments')
-  router.match('GET', '/very/deeply/nested/route/hello/there')
-  router.match('GET', '/static/index.html')
+  router.match('GET', wildcard())
 }
-print('all together:', time)
+print('wildcard:', time, cost)
+
+cost = stringCost(shortStatic, sameRadix, dynamicRoute, mixedRoute, longStatic, wildcard)
+time = now()
+for (i = 0; i < operations; i++) {
+  router.match('GET', shortStatic())
+  router.match('GET', sameRadix())
+  router.match('GET', dynamicRoute())
+  router.match('GET', mixedRoute())
+  router.match('GET', longStatic())
+  router.match('GET', wildcard())
+}
+print('all together:', time, cost)
