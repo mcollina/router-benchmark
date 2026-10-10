@@ -17,6 +17,7 @@ Tested routers:
 - [trek-router](https://www.npmjs.com/package/trek-router)
 - [hono](https://www.npmjs.com/package/hono)
 - [rou3](https://github.com/h3js/rou3)
+- [URLPattern](https://developer.mozilla.org/en-US/docs/Web/API/URL_Pattern_API) (built into Node.js)
 
 This benchmarks aims to test only http routers, so the method handling should be included.  
 Do you know other routers? [PR](https://github.com/delvedor/router-benchmark/pulls)! :D
@@ -243,6 +244,7 @@ npm start
 | `hono RegExp`     | &#10007;              | &#10003;      | &#10007;              | &#10003;              | &#10007;                          | &#10007;              | &#10007;                      |
 | `hono Smart`      | &#10007;              | &#10003;      | &#10007;              | &#10003;              | &#10003;                          | &#10007;              | &#10003;                      |
 | `rou3`            | &#10003;              | &#10007;      | &#10007;              | &#10003;              | &#10003;                          | &#10007;              | &#10003;                      |
+| `URLPattern`      | &#10003;              | &#10007;      | &#10003;              | &#10003;              | &#10003;                          | &#10007;              | &#10003;                      |
 
 *Did you find incorrect data in the above table? Please send a pr!*
 

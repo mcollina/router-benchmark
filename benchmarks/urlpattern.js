@@ -1,7 +1,8 @@
 'use strict'
 
-const { title, now, print, operations } = require('../utils')
+/* global URLPattern */
 
+const { title, now, print, operations, fresh, stringCost } = require('../utils')
 
 title('URLPattern benchmark')
 
@@ -21,11 +22,11 @@ const routes = [
   { method: 'GET', url: '/static/*' }
 ]
 
-function noop () {}
 var i = 0
 var time = 0
+var cost = 0
 
-let methods = { POST: [], GET: [] }
+const methods = { POST: [], GET: [] }
 routes.forEach(route => {
   methods[route.method].push(new URLPattern({
     hostname: '*',
@@ -36,7 +37,7 @@ routes.forEach(route => {
 function handle (opts) {
   const urls = methods[opts.method]
 
-  for (let url of urls) {
+  for (const url of urls) {
     const res = url.exec(opts.url)
     if (res) {
       return res
@@ -46,49 +47,63 @@ function handle (opts) {
   return null
 }
 
-time = now()
-for (i = 0; i < operations; i++) {
-  handle({ method: 'GET', url: 'http://localhost/user' })
-}
-print('short static:', time)
+const shortStatic = fresh('/user')
+const sameRadix = fresh('/user/comments')
+const dynamicRoute = fresh('/user/lookup/username/john')
+const mixedRoute = fresh('/event/abcd1234/comments')
+const longStatic = fresh('/very/deeply/nested/route/hello/there')
+const wildcard = fresh('/static/index.html')
 
+cost = stringCost(shortStatic)
 time = now()
 for (i = 0; i < operations; i++) {
-  handle({ method: 'GET', url: '/user/comments' })
+  handle({ method: 'GET', url: shortStatic() })
 }
-print('static with same radix:', time)
+print('short static:', time, cost)
 
+cost = stringCost(sameRadix)
 time = now()
 for (i = 0; i < operations; i++) {
-  handle({ method: 'GET', url: '/user/lookup/username/john' })
+  handle({ method: 'GET', url: sameRadix() })
 }
-print('dynamic route:', time)
+print('static with same radix:', time, cost)
 
+cost = stringCost(dynamicRoute)
 time = now()
 for (i = 0; i < operations; i++) {
-  handle({ method: 'GET', url: '/event/abcd1234/comments' })
+  handle({ method: 'GET', url: dynamicRoute() })
 }
-print('mixed static dynamic:', time)
+print('dynamic route:', time, cost)
 
+cost = stringCost(mixedRoute)
 time = now()
 for (i = 0; i < operations; i++) {
-  handle({ method: 'GET', url: '/very/deeply/nested/route/hello/there' })
+  handle({ method: 'GET', url: mixedRoute() })
 }
-print('long static:', time)
+print('mixed static dynamic:', time, cost)
 
+cost = stringCost(longStatic)
 time = now()
 for (i = 0; i < operations; i++) {
-  handle({ method: 'GET', url: '/static/index.html' })
+  handle({ method: 'GET', url: longStatic() })
 }
-print('wildcard:', time)
+print('long static:', time, cost)
 
+cost = stringCost(wildcard)
 time = now()
 for (i = 0; i < operations; i++) {
-  handle({ method: 'GET', url: '/user' })
-  handle({ method: 'GET', url: '/user/comments' })
-  handle({ method: 'GET', url: '/user/lookup/username/john' })
-  handle({ method: 'GET', url: '/event/abcd1234/comments' })
-  handle({ method: 'GET', url: '/very/deeply/nested/route/hello/there' })
-  handle({ method: 'GET', url: '/static/index.html' })
+  handle({ method: 'GET', url: wildcard() })
 }
-print('all together:', time)
+print('wildcard:', time, cost)
+
+cost = stringCost(shortStatic, sameRadix, dynamicRoute, mixedRoute, longStatic, wildcard)
+time = now()
+for (i = 0; i < operations; i++) {
+  handle({ method: 'GET', url: shortStatic() })
+  handle({ method: 'GET', url: sameRadix() })
+  handle({ method: 'GET', url: dynamicRoute() })
+  handle({ method: 'GET', url: mixedRoute() })
+  handle({ method: 'GET', url: longStatic() })
+  handle({ method: 'GET', url: wildcard() })
+}
+print('all together:', time, cost)

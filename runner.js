@@ -21,7 +21,8 @@ const benchmarks = [
   'rou3.js',
   'rou3-compiled.js',
   'rou3-url-handling.js',
-  'rou3-compiled-url-handling.js'
+  'rou3-compiled-url-handling.js',
+  'urlpattern.js'
 ]
 
 const queue = new Queue()
