@@ -30,189 +30,200 @@ Do you know other routers? [PR](https://github.com/delvedor/router-benchmark/pul
 =======================
  find-my-way benchmark
 =======================
-short static: 22,434,078 ops/sec
-static with same radix: 5,757,041 ops/sec
-dynamic route: 4,923,625 ops/sec
-mixed static dynamic: 6,171,494 ops/sec
-long static: 7,193,105 ops/sec
-wildcard: 7,320,630 ops/sec
-all together: 1,053,227 ops/sec
+short static: 21,057,446 ops/sec
+static with same radix: 7,224,208 ops/sec
+dynamic route: 4,482,538 ops/sec
+mixed static dynamic: 5,575,220 ops/sec
+long static: 7,658,396 ops/sec
+wildcard: 6,661,574 ops/sec
+all together: 1,153,757 ops/sec
 
 ================================
  find-my-way compiled benchmark
 ================================
-short static: 34,882,661 ops/sec
-static with same radix: 25,514,134 ops/sec
-dynamic route: 8,473,459 ops/sec
-mixed static dynamic: 8,485,437 ops/sec
-long static: 37,208,278 ops/sec
-wildcard: 10,236,316 ops/sec
-all together: 2,492,840 ops/sec
+short static: 47,980,684 ops/sec
+static with same radix: 29,910,749 ops/sec
+dynamic route: 9,616,614 ops/sec
+mixed static dynamic: 9,143,997 ops/sec
+long static: 37,479,748 ops/sec
+wildcard: 11,555,538 ops/sec
+all together: 2,437,745 ops/sec
 
 ================
  call benchmark
 ================
-short static: 4,126,779 ops/sec
-static with same radix: 3,049,304 ops/sec
-dynamic route: 886,951 ops/sec
-mixed static dynamic: 936,623 ops/sec
-long static: 2,024,755 ops/sec
-wildcard: 1,229,061 ops/sec
-all together: 241,221 ops/sec
+short static: 4,321,315 ops/sec
+static with same radix: 3,283,323 ops/sec
+dynamic route: 937,532 ops/sec
+mixed static dynamic: 903,877 ops/sec
+long static: 2,169,537 ops/sec
+wildcard: 1,292,846 ops/sec
+all together: 252,690 ops/sec
 
 ================================================
  express benchmark (WARNING: includes handling)
 ================================================
-short static: 2,079,521 ops/sec
-static with same radix: 1,687,849 ops/sec
-dynamic route: 1,019,757 ops/sec
-mixed static dynamic: 747,992 ops/sec
-long static: 774,706 ops/sec
-wildcard: 578,236 ops/sec
-all together: 151,589 ops/sec
+short static: 2,063,437 ops/sec
+static with same radix: 1,683,177 ops/sec
+dynamic route: 1,016,234 ops/sec
+mixed static dynamic: 757,383 ops/sec
+long static: 761,344 ops/sec
+wildcard: 590,326 ops/sec
+all together: 152,523 ops/sec
 
 ======================
  koa-router benchmark
 ======================
-short static: 2,143,931 ops/sec
-static with same radix: 2,123,671 ops/sec
-dynamic route: 2,079,795 ops/sec
-mixed static dynamic: 1,903,657 ops/sec
-long static: 2,019,762 ops/sec
-wildcard: 2,148,944 ops/sec
-all together: 321,534 ops/sec
+short static: 2,307,801 ops/sec
+static with same radix: 2,267,584 ops/sec
+dynamic route: 2,195,760 ops/sec
+mixed static dynamic: 1,957,603 ops/sec
+long static: 2,216,872 ops/sec
+wildcard: 2,182,663 ops/sec
+all together: 351,595 ops/sec
 
 ===========================
  koa-tree-router benchmark
 ===========================
-short static: 32,303,456 ops/sec
-static with same radix: 11,497,009 ops/sec
-dynamic route: 5,599,664 ops/sec
-mixed static dynamic: 6,278,941 ops/sec
-long static: 12,502,167 ops/sec
-wildcard: 7,987,439 ops/sec
-all together: 1,531,280 ops/sec
+short static: 32,084,476 ops/sec
+static with same radix: 12,184,387 ops/sec
+dynamic route: 5,017,496 ops/sec
+mixed static dynamic: 6,540,487 ops/sec
+long static: 12,044,528 ops/sec
+wildcard: 7,031,613 ops/sec
+all together: 1,453,975 ops/sec
 
 ===============================================
  router benchmark (WARNING: includes handling)
 ===============================================
-short static: 1,953,406 ops/sec
-static with same radix: 1,634,856 ops/sec
-dynamic route: 1,010,458 ops/sec
-mixed static dynamic: 717,379 ops/sec
-long static: 759,314 ops/sec
-wildcard: 565,624 ops/sec
-all together: 148,455 ops/sec
+short static: 1,944,898 ops/sec
+static with same radix: 1,591,226 ops/sec
+dynamic route: 934,674 ops/sec
+mixed static dynamic: 727,230 ops/sec
+long static: 756,855 ops/sec
+wildcard: 584,156 ops/sec
+all together: 142,966 ops/sec
 
 =================
  routr benchmark
 =================
-short static: 8,865,768 ops/sec
-static with same radix: 4,064,152 ops/sec
-dynamic route: 1,585,142 ops/sec
-mixed static dynamic: 1,046,520 ops/sec
-long static: 983,439 ops/sec
-wildcard: 687,282 ops/sec
-all together: 208,937 ops/sec
+short static: 9,188,543 ops/sec
+static with same radix: 4,598,528 ops/sec
+dynamic route: 1,624,810 ops/sec
+mixed static dynamic: 1,057,241 ops/sec
+long static: 994,278 ops/sec
+wildcard: 657,219 ops/sec
+all together: 195,405 ops/sec
 
 =========================
  server-router benchmark
 =========================
-short static: 2,255,426 ops/sec
-static with same radix: 1,680,304 ops/sec
-dynamic route: 1,072,326 ops/sec
-mixed static dynamic: 1,180,651 ops/sec
-long static: 971,399 ops/sec
-wildcard: 1,244,617 ops/sec
-all together: 209,528 ops/sec
+short static: 2,207,237 ops/sec
+static with same radix: 1,700,486 ops/sec
+dynamic route: 1,102,549 ops/sec
+mixed static dynamic: 1,217,543 ops/sec
+long static: 972,661 ops/sec
+wildcard: 1,221,399 ops/sec
+all together: 203,743 ops/sec
 
 =======================
  trek-router benchmark
 =======================
-short static: 15,950,892 ops/sec
-static with same radix: 7,462,400 ops/sec
-dynamic route: 3,139,335 ops/sec
-mixed static dynamic: 3,770,860 ops/sec
-long static: 8,182,750 ops/sec
-wildcard: 5,035,378 ops/sec
-all together: 848,873 ops/sec
+short static: 14,187,443 ops/sec
+static with same radix: 7,582,664 ops/sec
+dynamic route: 3,239,444 ops/sec
+mixed static dynamic: 3,746,396 ops/sec
+long static: 8,684,220 ops/sec
+wildcard: 5,015,001 ops/sec
+all together: 865,727 ops/sec
 
 =======================
  Hono RegExp benchmark
 =======================
-short static: 16,082,036 ops/sec
-static with same radix: 13,607,184 ops/sec
-dynamic route: 4,338,180 ops/sec
-mixed static dynamic: 4,336,028 ops/sec
-long static: 10,644,177 ops/sec
-wildcard: 4,783,642 ops/sec
-all together: 1,060,734 ops/sec
+short static: 15,769,584 ops/sec
+static with same radix: 13,561,221 ops/sec
+dynamic route: 4,173,271 ops/sec
+mixed static dynamic: 4,272,166 ops/sec
+long static: 10,473,110 ops/sec
+wildcard: 4,819,774 ops/sec
+all together: 1,118,697 ops/sec
 
 ===========================
  Hono TrieRouter benchmark
 ===========================
-short static: 2,892,199 ops/sec
-static with same radix: 2,064,644 ops/sec
-dynamic route: 761,001 ops/sec
-mixed static dynamic: 1,368,450 ops/sec
-long static: 950,422 ops/sec
-wildcard: 1,920,641 ops/sec
-all together: 242,322 ops/sec
+short static: 2,818,041 ops/sec
+static with same radix: 2,119,972 ops/sec
+dynamic route: 779,480 ops/sec
+mixed static dynamic: 1,411,371 ops/sec
+long static: 987,229 ops/sec
+wildcard: 1,995,426 ops/sec
+all together: 248,353 ops/sec
 
 ======================
  Hono Smart benchmark
 ======================
-short static: 2,859,088 ops/sec
-static with same radix: 2,112,066 ops/sec
-dynamic route: 786,114 ops/sec
-mixed static dynamic: 1,409,954 ops/sec
-long static: 970,022 ops/sec
-wildcard: 1,791,787 ops/sec
-all together: 234,531 ops/sec
+short static: 2,860,529 ops/sec
+static with same radix: 2,090,676 ops/sec
+dynamic route: 797,583 ops/sec
+mixed static dynamic: 1,320,004 ops/sec
+long static: 988,519 ops/sec
+wildcard: 1,950,177 ops/sec
+all together: 248,473 ops/sec
 
 ================
  rou3 benchmark
 ================
-short static: 23,322,295 ops/sec
-static with same radix: 14,608,921 ops/sec
-dynamic route: 1,184,723 ops/sec
-mixed static dynamic: 1,289,727 ops/sec
-long static: 10,652,103 ops/sec
-wildcard: 1,083,790 ops/sec
-all together: 320,282 ops/sec
+short static: 21,256,541 ops/sec
+static with same radix: 14,387,200 ops/sec
+dynamic route: 1,228,020 ops/sec
+mixed static dynamic: 1,336,753 ops/sec
+long static: 11,457,492 ops/sec
+wildcard: 1,141,310 ops/sec
+all together: 337,018 ops/sec
 
 =========================
  rou3 compiled benchmark
 =========================
-short static: 80,895,759 ops/sec
-static with same radix: 43,523,067 ops/sec
-dynamic route: 3,290,384 ops/sec
-mixed static dynamic: 3,978,541 ops/sec
-long static: 52,341,902 ops/sec
-wildcard: 4,083,133 ops/sec
-all together: 1,146,978 ops/sec
+short static: 76,811,147 ops/sec
+static with same radix: 72,263,019 ops/sec
+dynamic route: 3,418,536 ops/sec
+mixed static dynamic: 4,151,834 ops/sec
+long static: 52,450,483 ops/sec
+wildcard: 4,158,566 ops/sec
+all together: 1,196,186 ops/sec
 
 =======================================
  rou3 + querystring/decoding benchmark
 =======================================
-short static: 17,311,314 ops/sec
-static with same radix: 9,526,923 ops/sec
-dynamic route: 1,056,480 ops/sec
-mixed static dynamic: 1,181,231 ops/sec
-long static: 4,960,866 ops/sec
-wildcard: 1,071,281 ops/sec
-all together: 293,447 ops/sec
+short static: 17,015,996 ops/sec
+static with same radix: 8,722,335 ops/sec
+dynamic route: 1,101,664 ops/sec
+mixed static dynamic: 1,190,895 ops/sec
+long static: 4,958,927 ops/sec
+wildcard: 1,051,333 ops/sec
+all together: 291,605 ops/sec
 
 ================================================
  rou3 compiled + querystring/decoding benchmark
 ================================================
-short static: 41,058,811 ops/sec
-static with same radix: 19,620,116 ops/sec
-dynamic route: 2,620,871 ops/sec
-mixed static dynamic: 3,101,327 ops/sec
-long static: 7,863,429 ops/sec
-wildcard: 3,390,240 ops/sec
-all together: 771,881 ops/sec
+short static: 40,727,358 ops/sec
+static with same radix: 19,478,483 ops/sec
+dynamic route: 2,550,221 ops/sec
+mixed static dynamic: 2,951,618 ops/sec
+long static: 7,904,642 ops/sec
+wildcard: 3,266,438 ops/sec
+all together: 744,739 ops/sec
+
+======================
+ URLPattern benchmark
+======================
+short static: 111,536 ops/sec
+static with same radix: 109,250 ops/sec
+dynamic route: 84,467 ops/sec
+mixed static dynamic: 64,938 ops/sec
+long static: 61,798 ops/sec
+wildcard: 56,983 ops/sec
+all together: 12,446 ops/sec
 ```
 
 ### Run the benchmarks
